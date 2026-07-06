@@ -1,0 +1,4 @@
+#!/bin/bash
+git add .
+git commit -m "BackUp automatico: $(date +'%Y-%m-%d %H:%M:%S')"
+git status
