@@ -1,1 +1,31 @@
 #!/bin/bash
+read -p "Deseas registrar (r), localizar (l) o iniciar(i):" eleccion
+
+if [ "$eleccion" = "r" ]; then
+	read -p "En que nivel se encuentra:" nivel
+	mkdir Bandit$nivel
+	cd Bandit$nivel
+	clear 
+	read -p "Ingrese la contrasena del nivel $nivel para registrarla:" pass
+	read -p "Explique brevemente la solucion del nivel $nivel:" solucion
+	echo "--NIVEL$nivel-CONTRASENA-SOLUCION--" > registro.txt
+	echo "contrasena $nivel: $pass" >> registro.txt
+	echo "SOLUCION: $solucion" >> registro.txt
+elif [ "$eleccion" = "l" ]; then
+	read -p "De cual nivel desea ver la informacion:" nivel
+	cd Bandit$nivel
+	clear
+	cat registro.txt
+elif [ "$eleccion" = "i" ]; then
+	read -p "A cual nivel desea entrar:" nivel
+ 	cd Bandit$nivel
+	clear
+	grep "contrasena" registro.txt
+	read -p "Esperando a que copie la contrasena..."
+	clear
+	ssh -p 2220 bandit$nivel@bandit.labs.overthewire.org
+else
+	echo "Opcion invalida."
+fi
+
+
