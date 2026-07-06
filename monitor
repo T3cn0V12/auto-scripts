@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -f "host_monitor.log" ]; then
+	 echo "[ALERTA] El archivo host_monitor.log existe. Analizando posibles registros viejos..."
+	 sleep 2
+else 
+	touch host_monitor.log
+	echo "--- INICIO DEL REGISTRO ---" > host_monitor.log
+	echo "[INFO] Archivo host_monitor.log no encontrado. Se ha creado una nueva instancia limpia."
+fi 
